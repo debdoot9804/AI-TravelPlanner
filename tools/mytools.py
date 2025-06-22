@@ -8,7 +8,7 @@ from langchain_core.prompts import SystemMessagePromptTemplate, HumanMessageProm
 from langgraph.prebuilt import tools_condition, ToolNode
 from langgraph.graph.state import CompiledStateGraph
 from IPython.display import display, Image
-
+import requests
 
 @tool
 def add(a: float , b:float) -> float:
@@ -60,12 +60,58 @@ def get_weather(city:str)-> dict:
     import requests
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
     response = requests.get(url)
+    data = response.json()
+    
+    weather_info = {
+        "city": data.get("name"),   
+        "temperature": data["main"].get("temp"),
+        "humidity": data["main"].get("humidity"),
+        "weather": data["weather"][0].get("description") if data.get("weather") else "No description available"
+    }
+    return weather_info
+
     
     
-     response.json().main
+    
     
 @tool
-def search    
+def search_hotel(city:str,check_in:str,check_out:str,adults:int)-> dict:
+    """ For searching hotels in a city using Google Serp API
+        Args:
+            city (str): The name of the city.
+            check_in (str): Check-in date in 'YYYY-MM-DD' format.
+            check_out (str): Check-out date in 'YYYY-MM-DD' format.
+            adults (int): Number of adults.
+            Returns:
+            dict: Hotel search results.
+    """
+    load_dotenv()
+    
+        
+    baseurl="https://serpapi.com/search"
+    params = {
+    "engine": "google_hotels",
+    "q": f"best hotels in {city} for {adults} adults",
+    "check_in_date": check_in,     
+    "check_out_date": check_out,   
+    "api_key": os.getenv("SERP_API_KEY"),
+    "num": 5
+}
+
+    search=requests.get(baseurl,params=params)
+    response=search.json()
+    properties = response.get('properties')
+    if not properties:
+        return {"error": "No hotel data found. Response: " + str(response)}
+
+    results = {
+    property['name']: property.get("total_rate","N/A")
+    for property in properties
+    if property.get('type') == 'hotel'
+}
+
+       
+    return results
     
 
     
