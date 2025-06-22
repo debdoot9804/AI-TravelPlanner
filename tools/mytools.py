@@ -112,6 +112,42 @@ def search_hotel(city:str,check_in:str,check_out:str,adults:int)-> dict:
 
        
     return results
+
+@tool
+def search_attractions(city:str)->dict:
+    """ For searching attractions in a city using Google Serp API
+        Args:
+            city (str): The name of the city.
+        Returns:
+            dict: Attraction search results.
+    """
+    load_dotenv()
+    print("Search Local attractions...")
+    
+    baseurl="https://serpapi.com/search"
+    params = {
+        "engine": "google_local",
+        "q": f"top attractions in {city}",
+        "location":f"{city}",
+        "api_key": os.getenv("SERP_API_KEY"),
+        "num": 5
+    }
+    search=requests.get(baseurl,params=params)
+    response=search.json()
+    attractions = response.get('local_results', [])
+    if not attractions:
+        return {"error": "No attractions data found. Response: " + str(response)}
+    results = {
+        attraction['title']: {
+            "address": attraction.get("address", "N/A"),
+            "rating": attraction.get("rating", "N/A"),
+            "reviews": attraction.get("reviews", "N/A")
+        }
+        for attraction in attractions
+    }   
+    
+    
+    return results
     
 
     
