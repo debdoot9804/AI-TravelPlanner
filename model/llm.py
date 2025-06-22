@@ -44,4 +44,4 @@ def call_llm(state:MessagesState) -> MessagesState:
     tools=[add, pro, divide, get_weather, search_attractions, search_hotels, search_restaurant]
     llm_with_tools=llm.bind_tools(tools)
     response= llm_with_tools.invoke([SYSTEM_PROMPT]+state['messages'])
-    return {messages:response['messages']}
+    return {'messages':[response]}

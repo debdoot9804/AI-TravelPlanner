@@ -77,7 +77,7 @@ def get_weather(city:str)-> dict:
     
     
 @tool
-def search_hotel(city:str,check_in:str,check_out:str,adults:int)-> dict:
+def search_hotels(city:str,check_in:str,check_out:str,adults:int)-> dict:
     """ For searching hotels in a city using Google Serp API
         Args:
             city (str): The name of the city.
