@@ -10,6 +10,8 @@ from langgraph.graph.state import CompiledStateGraph
 from IPython.display import display, Image
 import requests
 
+load_dotenv()
+
 @tool
 def add(a: float , b:float) -> float:
     """
@@ -52,7 +54,7 @@ def get_weather(city:str)-> dict:
         Returns:
             dict: Weather information for the specified city.
     """
-    load_dotenv()
+    
     api_key = os.getenv("OPEN_WEATHER_API")
     if not api_key:
         raise ValueError("API key not found in environment variables.")
@@ -85,7 +87,7 @@ def search_hotel(city:str,check_in:str,check_out:str,adults:int)-> dict:
             Returns:
             dict: Hotel search results.
     """
-    load_dotenv()
+    
     
         
     baseurl="https://serpapi.com/search"
@@ -121,7 +123,7 @@ def search_attractions(city:str)->dict:
         Returns:
             dict: Attraction search results.
     """
-    load_dotenv()
+    
     print("Search Local attractions...")
     
     baseurl="https://serpapi.com/search"
@@ -146,8 +148,42 @@ def search_attractions(city:str)->dict:
         for attraction in attractions
     }   
     
-    
     return results
+
+@tool
+def search_restaurant(city:str)->dict:
+    """For searching restaurants in the city using Google Serp API
+        Args:
+            city (str): The name of the city.
+        Returns:
+            dict: Restaurant search results.
+    """ 
+    print("Searching Local Restaurants...")
+    baseurl="https://serpapi.com/search"
+    params = {
+        "engine": "google_local",
+        "q": f"good food,dining restaurants in {city}",
+        "location":f"{city}",
+        "api_key": os.getenv("SERP_API_KEY"),
+        "num": 5
+    }
+    search=requests.get(baseurl,params=params)
+    response=search.json()
+    restaurants = response.get('local_results', [])
+    if not restaurants:
+        return {"error": "No restaurant data found. Response: " + str(response)}
+    results = {
+        restaurant['title']: {
+            "address": restaurant.get("address", "N/A"),
+            "rating": restaurant.get("rating", "N/A"),
+            "reviews": restaurant.get("reviews", "N/A")
+        }
+        for restaurant in restaurants
+    }
+    return results
+
+
+       
     
 
     
