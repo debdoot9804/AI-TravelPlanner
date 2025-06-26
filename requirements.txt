@@ -5,3 +5,4 @@ langchain_core
 langgraph
 langchain
 streamlit
+Ipython
