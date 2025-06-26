@@ -50,7 +50,7 @@ if not st.session_state.trip_started:
                     final_response = result["messages"][-1].content
                     ai_msg = AIMessage(content=final_response)
                     st.session_state.messages.append(ai_msg)
-                    st.experimental_rerun()  # reload into chat interface
+                    st.rerun()  # reload into chat interface
                 except Exception as e:
                     st.error(f"Error occurred: {e}")
         else:
