@@ -1,7 +1,7 @@
 # 🌍 AI Travel Planner Assistant
 An intelligent, agent-based travel planning assistant built using LangChain, Streamlit, and an LLM (like GPT-4 or LLaMA or DeepSeek). This smart assistant helps users plan detailed trips with just a natural language prompt — from checking the weather to recommending attractions, hotels, and even estimating total costs.
 
-##🚀 Live Demo
+## 🚀 Live Demo
 
 👉 Try the app live:
 🔗 https://ai-travelplanner-debdoot.streamlit.app/
