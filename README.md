@@ -2,7 +2,6 @@
 An intelligent, agent-based travel planning assistant built using LangChain, Streamlit, and an LLM (like GPT-4 or LLaMA or DeepSeek). This smart assistant helps users plan detailed trips with just a natural language prompt — from checking the weather to recommending attractions, hotels, and even estimating total costs.
 
 ## ✨ Features
--------------------------------------------------------------------------------------------------------------
 💬 Conversational Interface: Plan your trip via a chat-style conversation.
 
 🌤️ Weather Updates: Get real-time weather info for your destination.
@@ -16,7 +15,6 @@ An intelligent, agent-based travel planning assistant built using LangChain, Str
 🔁 Memory-Aware Chat: Agent remembers your previous queries and responses.
 
 ## 🧠 Powered By
--------------------------------------------------------------------------------------------------------------
 LangChain for agent workflow orchestration.
 
 LLMs via OpenAI / Deepseek / LLaMA / Phi.
