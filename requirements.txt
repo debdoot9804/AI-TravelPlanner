@@ -2,7 +2,6 @@ langchain_openai
 langchain_groq
 python-dotenv
 langchain_core
-
 langgraph
-
+langchain
 streamlit
