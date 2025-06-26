@@ -54,7 +54,7 @@ def get_weather(city:str)-> dict:
         Returns:
             dict: Weather information for the specified city.
     """
-    
+    print("Getting Weather...")
     api_key = os.getenv("OPEN_WEATHER_API")
     if not api_key:
         raise ValueError("API key not found in environment variables.")
@@ -87,7 +87,7 @@ def search_hotels(city:str,check_in:str,check_out:str,adults:int)-> dict:
             Returns:
             dict: Hotel search results.
     """
-    
+    print("Searching Hotels...")
     
         
     baseurl="https://serpapi.com/search"
